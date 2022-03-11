@@ -1,0 +1,88 @@
+version: 2
+
+sources:
+
+  - name: tutorial
+    schema: public
+    database: dbt 
+
+    quoting:
+      database: false
+      schema: false
+      identifier: false
+
+    freshness:
+      warn_after: {count: 24, period: hour}
+      error_after: {count: 48, period: hour}
+
+    tables:
+      - name: superheroes 
+        loaded_at_field: created_at
+        description: >
+          Contains demographic information about each superhero.
+
+      - name: addresses
+        description: Contains additional address details.
+        columns:
+          - name: address_id
+            description: Values represented like Globally Unique Identifiers (GUID).
+            tests:
+              - unique 
+              - not_null
+
+      - name: events
+        loaded_at_field: created_at
+        description: Contains customer level event information E.g. page view, adding to cart and products.
+        columns:
+          - name: event_id
+            description: Values represented like Globally Unique Identifiers (GUID).
+            tests:
+              - unique 
+              - not_null
+
+      - name: order_items
+        description: Contains order and product ids and quantity of order.
+        columns:
+          - name: order_id 
+            description: Values represented like Globally Unique Identifiers (GUID).
+            tests: 
+              - not_null
+
+      - name: orders
+        loaded_at_field: delivered_at
+        description: Contains order information. E.g. shipping costs, delivery timelines and status.
+        columns:
+          - name: order_id
+            description: Values represented like Globally Unique Identifiers (GUID).
+            tests:
+              - unique
+              - not_null
+
+      - name: products
+        description: Contains additional product information E.g Item Name, price, inventory amount.
+        columns:
+          - name: product_id
+            description: Values represented like Globally Unique Identifiers (GUID).
+            tests:
+              - unique
+              - not_null
+
+      - name: promos
+        description: Contains promotional information E.g. Discount, status.
+        columns:
+          - name: promo_id
+            description: Values represented like Globally Unique Identifiers (GUID).
+            tests:
+              - unique
+              - not_null
+
+      - name: users
+        loaded_at_field: updated_at
+        description: Conatins additional customer details E.g. First and last name, email, phone number.
+        columns:
+          - name: user_id
+            description: Values represented like Globally Unique Identifiers (GUID).
+            tests:
+              - unique 
+              - not_null
+
