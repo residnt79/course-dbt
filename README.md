@@ -7,3 +7,7 @@ Template repository for the projects and environment of the course: Analytics en
 ## License
 
 Apache 2.0
+
+
+# Project Assignments
+[Week1 Assignments](./greenery/week1.md)
