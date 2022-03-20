@@ -1,0 +1,8 @@
+version: 2
+
+models:
+
+  - name: stg_users 
+    columns:
+      - name: user_guid
+        description: Unique string guid for each customer.

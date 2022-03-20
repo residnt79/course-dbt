@@ -1,0 +1,58 @@
+version: 2
+
+models:
+
+  - name: dim_products
+    description: Product dimension table.
+    columns:
+      - name: product_guid
+      - name: product_name
+      - name: price_usd
+      - name: inventory
+  
+  - name: dim_users
+    description: User dimension table.
+    columns:
+      - name: user_guid
+      - name: first_name
+      - name: last_name
+      - name: full_name
+        description: Concatenation of first and last name.
+      - name: email
+      - name: phone_number
+      - name: address
+      - name: zipcode
+      - name: state
+      - name: country
+
+  - name: int_users
+    description: Intermediate table combining stg_users and stg_address
+    columns:
+      - name: user_guid
+      - name: first_name
+      - name: last_name
+      - name: email
+      - name: phone_number
+      - name: address
+      - name: zipcode
+      - name: state
+      - name: country
+
+  - name: fact_orders
+    description: Fact table at the order level grain.
+    columns:
+      - name: order_guid
+      - name: user_guid
+      - name: promo_guid
+      - name: address_guid
+      - name: created_at_timestamp_utc
+      - name: order_cost_usd
+      - name: shipping_cost_usd
+      - name: order_total_usd
+      - name: tracking_guid
+      - name: shipping_service
+      - name: estimated_delivery_at_timestamp_utc
+      - name: delivered_at_timestamp_utc
+      - name: created_at_hour
+      - name: created_at_date
+      - name: seconds_to_delivery

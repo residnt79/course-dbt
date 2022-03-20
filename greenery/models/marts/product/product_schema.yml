@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: int_fact_events_users
+    description: Intermediate table counting event types per session/user
+    columns:
+      - name: event_type
+        tests:
+          - accepted_values:
+              values: ['add_to_cart', 'checkout', 'page_view', 'package_shipped']
+
+  - name: fact_events_users
+    description: Fact table with 1 record per session_guid
+    columns:
+      - name: session_guid
+        tests:
+          - unique 
+          - not_null

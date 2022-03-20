@@ -1,0 +1,39 @@
+version: 2
+
+models:
+  - name: int_fact_order_user_agg
+    description: Intermediate model aggregating at the user level by status.
+    columns:
+      - name: user_guid
+      - name: status
+      - name: number_of_purchases
+        description: The count of order_guids.
+      - name: ltd_order_cost_usd
+        description: Sum of the cost of the orders.
+      - name: ltd_shipping_costs_usd 
+        description: Sum of shipping costs across orders.
+      - name: ltd_order_total_usd
+        description: Sum of the total cost of all orders, including shipping.
+
+  - name: fact_order_users
+    description: Fact order aggregated at the user level.
+    columns:
+      - name: user_guid 
+        tests:
+          - unique 
+          - not_null
+      - name: full_name
+      - name: country 
+      - name: state 
+      - name: is_repeat_spender 
+        description: Boolean flag for users who have 2 or more purchases.
+      - name: number_of_purchases 
+      - name: delivered_orders
+        description: Number of purchases that have been delivered 
+      - name: shipped_orders 
+        description: Number of purchases that have been shipped 
+      - name: preparing_orders 
+        description: Number of purchases that are being prepared 
+      - name: ltd_order_cost_usd 
+      - name: ltd_shipping_cost_usd 
+      - name: ltd_order_total_usd

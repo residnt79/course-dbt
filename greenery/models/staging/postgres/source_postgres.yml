@@ -2,7 +2,7 @@ version: 2
 
 sources:
 
-  - name: tutorial
+  - name: greenery
     schema: public
     database: dbt 
 
@@ -16,11 +16,6 @@ sources:
       error_after: {count: 48, period: hour}
 
     tables:
-      - name: superheroes 
-        loaded_at_field: created_at
-        description: >
-          Contains demographic information about each superhero.
-
       - name: addresses
         description: Contains additional address details.
         columns:
