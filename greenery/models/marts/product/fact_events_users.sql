@@ -26,7 +26,7 @@ WITH session_length AS (
 )
 , int_events AS (
 
-    SELECT * FROM {{ ref('int_fact_events_users') }}
+    SELECT * FROM {{ ref('int_fact_events_users_agg') }}
 )
 , users AS (
 

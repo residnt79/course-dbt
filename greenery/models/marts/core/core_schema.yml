@@ -6,6 +6,9 @@ models:
     description: Product dimension table.
     columns:
       - name: product_guid
+        tests:
+          - unique
+          - not_null
       - name: product_name
       - name: price_usd
       - name: inventory
@@ -14,6 +17,9 @@ models:
     description: User dimension table.
     columns:
       - name: user_guid
+        tests:
+            - unique
+            - not_null
       - name: first_name
       - name: last_name
       - name: full_name
@@ -42,6 +48,9 @@ models:
     description: Fact table at the order level grain.
     columns:
       - name: order_guid
+        tests:
+          - unique
+          - not_null
       - name: user_guid
       - name: promo_guid
       - name: address_guid
