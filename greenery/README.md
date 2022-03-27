@@ -17,4 +17,5 @@ Try running the following commands:
 
 # Project Assignments
 [Week1 Assignments](week1.md)<br>
-[Week2 Assignments](week2.md)
+[Week2 Assignments](week2.md)<br>
+[Week2 Assignments](week3.md)
