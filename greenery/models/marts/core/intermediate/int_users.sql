@@ -19,6 +19,7 @@ with users as (
         user_guid,
         first_name,
         last_name,
+        first_name || ' ' || last_name as full_name,
         email,
         phone_number,
         address,

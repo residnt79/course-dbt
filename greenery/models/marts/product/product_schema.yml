@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: int_fact_events_users
+  - name: int_fact_events_users_agg
     description: Intermediate table counting event types per session/user
     columns:
       - name: event_type
@@ -16,3 +16,74 @@ models:
         tests:
           - unique 
           - not_null
+
+  - name: int_fact_sessions_agg
+    description: Intermediate session aggregations on event type
+    columns: 
+      - name: session_guid
+        tests: 
+          - unique 
+          - not_null 
+      - name: page_view
+        description: How many page view events for that session  
+      - name: add_to_cart 
+        description: How many add_to_cart events for that session  
+      - name: checkout 
+        description: How many checkout events for that session 
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 1
+      - name: package_shipped 
+        description: How many package_shipped events for that session  
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 1
+      - name: has_purchase
+        description: Did this session have an order  
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 1
+
+  - name: fact_sessions 
+    description: Session table with purchase 
+    columns:
+      - name: session_guid 
+        tests:
+          - not_null 
+          - unique
+      - name: has_purchase 
+        description: Did this session have a purchase
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 1
+
+  - name: int_fact_product_session_agg 
+    description: Intermediate product aggregation table with page view, add to cart and checkout events 
+
+  - name: fact_product_events
+    description: Product fact table at the event level
+    columns:
+      - name: product_name 
+      - name: views
+        description: Number of views a product has gotten.
+      - name: add_to_cart
+        description: Number of times a product has been added to cart.
+      - name: checkout
+        description: Number of times a product has been checked out.
+      - name: product_conversion_rate 
+        tests:
+            - dbt_utils.accepted_range:
+                min_value: 0
+                max_value: 1
+        description: Conversion rate per product. (Checkout / Page Views)
+      - name: unordered_rate
+        description: Rate at which a product was added to a cart but not purchased. ((Added to Cart - Checkout) / Page Views)
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 1
+        

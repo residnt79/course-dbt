@@ -6,7 +6,7 @@
 
 WITH events as (
 
-    SELECT * from {{ ref('fact_events') }}
+    SELECT * from {{ ref('stg_events') }}
 )
 
 SELECT
@@ -14,6 +14,7 @@ SELECT
     user_guid,
     created_at_date,
     event_type,
+    order_guid,
     count(event_type) as event_type_count
 FROM events
-{{ dbt_utils.group_by(n=4) }}
+{{ dbt_utils.group_by(n=5) }}

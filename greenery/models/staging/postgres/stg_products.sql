@@ -6,7 +6,7 @@ WITH source_data AS (
 , final AS (
     SELECT 
         product_id AS product_guid,
-        name,
+        name as product_name,
         price as price_usd,
         inventory
     FROM source_data

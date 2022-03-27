@@ -35,8 +35,11 @@ models:
   greenery:
     # Config indicated by + and applies to all files under models/example/
     marts:
-      +materialization: table
+      +materialized: table
     staging:
-      +materialization: view
+      +materialized: view
     tutorial:
-      +materialization: view
+      +materialized: view
+
+on-run-end:
+  - "{{ grant_select(role='reporting') }}"

@@ -7,7 +7,7 @@ with products as (
 
 SELECT
     product_guid,
-    name as product_name,
+    product_name,
     price_usd,
     inventory
 FROM products

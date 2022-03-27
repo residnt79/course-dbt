@@ -12,9 +12,15 @@ with user_orders_agg as (
     SELECT 
         user_guid,
         
-        {% for status in statuses -%}
-        sum(case when status = '{{status}}' then number_of_purchases else 0 end) as {{status}}_orders,
-        {% endfor -%}
+        {{ pivot_for_loop(
+            column_array = statuses,
+            column = 'status', 
+            then_column='number_of_purchases', 
+            agg='SUM', 
+            comma = 'end', 
+            end_comma = 'yes',
+            suffix = '_orders'    
+        ) }}
 
         sum(number_of_purchases) as number_of_purchases,
         sum(ltd_order_cost_usd) as ltd_order_cost_usd,
@@ -25,7 +31,7 @@ with user_orders_agg as (
 )
 , users as (
 
-    SELECT * from {{ ref('dim_users') }}
+    SELECT * from {{ ref('int_users') }}
 )
 
 SELECT

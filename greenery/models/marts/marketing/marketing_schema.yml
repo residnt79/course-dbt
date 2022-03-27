@@ -15,7 +15,7 @@ models:
       - name: ltd_order_total_usd
         description: Sum of the total cost of all orders, including shipping.
 
-  - name: fact_order_users
+  - name: fact_orders_users
     description: Fact order aggregated at the user level.
     columns:
       - name: user_guid 
@@ -37,3 +37,29 @@ models:
       - name: ltd_order_cost_usd 
       - name: ltd_shipping_cost_usd 
       - name: ltd_order_total_usd
+
+  - name: fact_order_product
+    description: Intermediate aggregation table for products.
+    columns:
+      - name: product_name
+        description: Name of the product 
+        tests:
+          - not_null 
+          - unique
+      - name: price_usd,
+        tests:
+          - positive_values
+      - name: units_sold
+        description: Number of units sold.
+        tests:
+          - positive_values 
+      - name: total_gross_usd
+        description: Total gross revenue before discounts. (Price USD x Units Sold).
+        tests:
+          - positive_values 
+      - name: total_discount_usd
+        description: Amount saved on this item by using promo codes.
+      - name: total_net_usd
+        description: Total net revenue after discounts have been applied. (Total Gross Revenue - Total Discount USD)
+        tests:
+          - positive_values

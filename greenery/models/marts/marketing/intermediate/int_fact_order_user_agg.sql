@@ -6,7 +6,7 @@
 
 with fact_orders as (
 
-    SELECT * from {{ ref('fact_orders')}}
+    SELECT * from {{ ref('stg_orders')}}
 
 )
 

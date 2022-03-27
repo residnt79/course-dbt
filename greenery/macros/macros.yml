@@ -1,0 +1,33 @@
+version: 2
+
+macros:
+  - name: pivot_for_loop
+    description: A macro that takes a array of values from a column and creates a loop with aggregation.
+    arguments:
+      - name: column_array
+        type: array 
+        description: Array of values you want to loop through.
+      - name: column
+        type: string
+        description: The column you are comparing against.
+      - name: then_column
+        type: string
+        description: The column used then comparison is true. Default = 1
+      - name: else_column
+        type: string
+        description: The column used when the comparison is false. Default = 0.
+      - name: agg 
+        type: string 
+        description: The aggregration type you want to use. Default = 'None'.
+      - name: comma
+        type: string
+        description: Leading or Trailing commas. Default = 'lead'
+      - name: end_comma
+        type: string
+        description: Does the last loop in trailing commas need a comma. Default = 'no'
+      - name: prefix
+        type: string 
+        description: Add's a prefix to the resulting column name
+      - name: suffix
+        type: string 
+        description: Add's a suffix to the resulting column name

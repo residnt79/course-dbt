@@ -6,11 +6,11 @@
 
 with orders as (
 
-    SELECT * FROM {{ ref('fact_orders') }}
+    SELECT * FROM {{ ref('stg_orders') }}
 )
 , products as (
 
-    SELECT * FROM {{ ref('dim_products') }}
+    SELECT * FROM {{ ref('stg_products') }}
 )
 , order_items as (
 
@@ -18,24 +18,24 @@ with orders as (
 )
 , promos as (
 
-    SELECT * from {{ ref('dim_promos') }}
+    SELECT * from {{ ref('stg_promos') }}
 )
 , orders_prep as (
 
     SELECT
-        o.order_guid,
+        orders.order_guid,
         items.quantity,
-        p.product_name,
-        p.price_usd,
+        product.product_name,
+        product.price_usd,
         coalesce(promo.discount_percent) as discount_percent,
         items.quantity * price_usd as gross_total
-    FROM orders AS o 
+    FROM orders AS orders
     LEFT JOIN order_items AS items   
-        ON o.order_guid = items.order_guid
-    LEFT JOIN products AS p 
-        on items.product_guid = p.product_guid
+        ON orders.order_guid = items.order_guid
+    LEFT JOIN products AS product 
+        on items.product_guid = product.product_guid
     LEFT JOIN promos as promo
-        on o.promo_guid = promo.promo_guid
+        on orders.promo_guid = promo.promo_guid
 
 )
 , pricing as (
