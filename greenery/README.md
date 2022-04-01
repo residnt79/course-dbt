@@ -18,4 +18,5 @@ Try running the following commands:
 # Project Assignments
 [Week1 Assignments](week1.md)<br>
 [Week2 Assignments](week2.md)<br>
-[Week3 Assignments](week3.md)
+[Week3 Assignments](week3.md)<br>
+[Week4 Assignments](./greenery/week3.md)

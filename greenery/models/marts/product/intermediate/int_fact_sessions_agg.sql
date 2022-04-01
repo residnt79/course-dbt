@@ -26,7 +26,8 @@ with events as (
             end_comma = 'yes' 
         ) }}
 
-        MAX(CASE WHEN order_guid IS NOT NULL THEN 1 ELSE 0 END) AS has_purchase
+        MAX(CASE WHEN order_guid IS NOT NULL THEN 1 ELSE 0 END) AS has_purchase,
+        MAX(created_at_timestamp_utc) AS created_at_timestamp_utc
     FROM events
     GROUP BY 1
 )

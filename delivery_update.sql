@@ -4,7 +4,8 @@ SET
   tracking_id = 'a807fe66-d8b1-4d38-b409-558fed8bd75f',
   shipping_service = 'ups',
   estimated_delivery_at = '2021-02-19T10:15:26Z',
-  status = 'shipped'
+  status = 'shipped',
+  create_at = now()
 WHERE
   order_id = '914b8929-e04a-40f8-86ee-357f2be3a2a2';
 UPDATE

@@ -12,4 +12,5 @@ Apache 2.0
 # Project Assignments
 [Week1 Assignments](./greenery/week1.md)<br>
 [Week2 Assignments](./greenery/week2.md)<br>
-[Week3 Assignments](./greenery/week3.md)
+[Week3 Assignments](./greenery/week3.md)<br>
+[Week4 Assignments](./greenery/week3.md)

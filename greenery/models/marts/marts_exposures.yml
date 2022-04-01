@@ -1,0 +1,16 @@
+version: 2
+
+exposures:
+  - name: smry_session_funnel 
+    type: dashboard 
+    maturity: high 
+    description: Session funnel metircs
+    depends_on:
+      - ref('int_sessions_snapshot')
+      - ref('int_fact_sessions_agg')
+      - ref('stg_events')
+      - source('greenery','events')
+
+    owner:
+      name: Jason Scott
+      email: jason@data.com
